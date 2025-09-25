@@ -5,11 +5,12 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "@/app/firebaseConfig"
+import { Car } from "@/Car";
 
 
 async function fetchCarsFromFirebase() {
   const response = await getDocs(collection(db, "cars"));
-  const cars = response.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  const cars = response.docs.map(doc => ({ id: doc.id, ...doc.data() as Omit<Car, 'id'> }));
   return cars;
 }
 
@@ -24,7 +25,7 @@ function formatIndianNumber(x: string) {
 export default function Cars() {
   const [pageSize, setPageSize] = useState(8);
   const [page, setPage] = useState(1);
-  const [cars, setCars] = useState<any[]>([]);
+  const [cars, setCars] = useState<Car[]>([]);
 
   useEffect(() => {
     async function loadCars() {
