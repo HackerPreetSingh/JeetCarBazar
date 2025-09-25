@@ -6,6 +6,7 @@ import "swiper/css";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "@/app/firebaseConfig"
 import { Car } from "@/Car";
+import Image from "next/image";
 
 
 async function fetchCarsFromFirebase() {
@@ -52,10 +53,12 @@ export default function Cars() {
             >
               {car.images.map((img: string, idx: number) => (
                 <SwiperSlide key={idx}>
-                  <img
+                  <Image
                     src={`/cars/${img}`}
                     alt={`${car.name} image ${idx + 1}`}
                     className="w-full h-40 object-cover mb-2 rounded"
+                    width={400}
+                    height={200}
                   />
                 </SwiperSlide>
               ))}
