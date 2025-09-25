@@ -1,15 +1,17 @@
 "use client";
-import { useState } from "react";
-import cars from "@/data/cars.json";
+import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
+import { getDocs, collection } from "firebase/firestore";
+import { db } from "@/app/firebaseConfig"
 
-const carImages = [
-  "car1.jpg",
-  "car2.jpg",
-  "car3.jpg"
-];
+
+async function fetchCarsFromFirebase() {
+  const response = await getDocs(collection(db, "cars"));
+  const cars = response.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  return cars;
+}
 
 function formatIndianNumber(x: string) {
   const lastThree = x.substring(x.length - 3);
@@ -22,6 +24,15 @@ function formatIndianNumber(x: string) {
 export default function Cars() {
   const [pageSize, setPageSize] = useState(8);
   const [page, setPage] = useState(1);
+  const [cars, setCars] = useState<any[]>([]);
+
+  useEffect(() => {
+    async function loadCars() {
+      const carsData = await fetchCarsFromFirebase();
+      setCars(carsData);
+    }
+    loadCars();
+  }, []);
 
   const totalPages = Math.ceil(cars.length / pageSize);
   const paginatedCars = cars.slice((page - 1) * pageSize, page * pageSize);
@@ -38,7 +49,7 @@ export default function Cars() {
               loop={true}
               className="w-full h-40"
             >
-              {carImages.map((img, idx) => (
+              {car.images.map((img: string, idx: number) => (
                 <SwiperSlide key={idx}>
                   <img
                     src={`/cars/${img}`}
@@ -52,7 +63,7 @@ export default function Cars() {
             <p className="text-sm text-gray-700">{car.model ?? ""} | {car.year ?? ""}</p>
             <p className="text-sm text-gray-700">Owner: {car.owner ?? ""}</p>
             <p className="text-sm text-gray-700">Mileage: {car.mileage ?? ""} km</p>
-            <p className="text-sm text-gray-700">Location: {car.location ?? ""}</p>
+            <p className="text-sm text-gray-700">Average: {car.average ?? ""}</p>
             <p className="text-lg font-semibold mt-2 text-red-700">
               ₹{car.price ? formatIndianNumber(car.price) : "N/A"}
             </p>
