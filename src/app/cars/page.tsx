@@ -19,45 +19,6 @@ function formatIndianNumber(x: string) {
     : lastThree;
 }
 
-export async function generateMetadata() {
-  const keywords = cars.map(car => car.name);
-
-  return {
-    title: "Cars | Jeet Car Bazar",
-    description:
-      "Find the best used cars for sale and purchase at Jeet Car Bazar. Explore a wide range of pre-owned vehicles, get the best deals, and enjoy transparent service. Finance facility available.",
-    keywords,
-    penGraph: {
-      title: "Jeet Car Bazar | Buy & Sell Used Cars on Commission",
-      description:
-        "Buy and sell used cars on commission basis with Jeet Car Bazar. Trusted, transparent, and reliable service. Finance facility available.",
-      url: "https://jeet-car-bazar.vercel.app",
-      siteName: "Jeet Car Bazar",
-      images: [
-        {
-          url: "/card.jpg", // Place a good image in public/
-          width: 1200,
-          height: 630,
-          alt: "Jeet Car Bazar - Buy & Sell Used Cars",
-        },
-      ],
-    },
-    robots: {
-      index: true,
-      follow: true,
-      nocache: false,
-      googleBot: {
-        index: true,
-        follow: true,
-        noimageindex: false,
-        'max-snippet': -1,
-        'max-image-preview': "large",
-        'max-video-preview': -1,
-      },
-    },
-  };
-}
-
 export default function Cars() {
   const [pageSize, setPageSize] = useState(8);
   const [page, setPage] = useState(1);
