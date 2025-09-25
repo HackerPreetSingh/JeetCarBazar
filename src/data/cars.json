@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "name": "Honda City",
+    "model": "VX",
+    "year": 2018,
+    "owner": "Amit Sharma",
+    "price": "650000",
+    "mileage": 42000,
+    "location": "Delhi"
+  },
+  {
+    "id": 2,
+    "name": "Maruti Suzuki Swift",
+    "model": "VXI",
+    "year": 2017,
+    "owner": "Priya Singh",
+    "price": "480000",
+    "mileage": 53000,
+    "location": "Mumbai"
+  },
+  {
+    "id": 3,
+    "name": "Hyundai Creta",
+    "model": "SX",
+    "year": 2019,
+    "owner": "Rahul Verma",
+    "price": "950000",
+    "mileage": 31000,
+    "location": "Bangalore"
+  },
+  {
+    "id": 4,
+    "name": "Toyota Innova",
+    "model": "Crysta",
+    "year": 2016,
+    "owner": "Sunita Patel",
+    "price": "1200000",
+    "mileage": 67000,
+    "location": "Ahmedabad"
+  },
+  {
+    "id": 5,
+    "name": "Ford EcoSport",
+    "model": "Titanium",
+    "year": 2015,
+    "owner": "Vikram Mehra",
+    "price": "550000",
+    "mileage": 59000,
+    "location": "Bareilly"
+  },
+  {
+    "id": 6,
+    "name": "Renault Kwid",
+    "model": "RXT",
+    "year": 2020,
+    "owner": "Neha Gupta",
+    "price": "380000",
+    "mileage": 21000,
+    "location": "Jaipur"
+  },
+  {
+    "id": 7,
+    "name": "Mahindra XUV500",
+    "model": "W8",
+    "year": 2018,
+    "owner": "Suresh Kumar",
+    "price": "1100000",
+    "mileage": 45000,
+    "location": "Hyderabad"
+  },
+  {
+    "id": 8,
+    "name": "Volkswagen Polo",
+    "model": "Highline",
+    "year": 2017,
+    "owner": "Ritika Jain",
+    "price": "520000",
+    "mileage": 48000,
+    "location": "Pune"
+  },
+  {
+    "id": 9,
+    "name": "Tata Nexon",
+    "model": "XZ+",
+    "year": 2019,
+    "owner": "Manish Agarwal",
+    "price": "800000",
+    "mileage": 35000,
+    "location": "Kolkata"
+  },
+  {
+    "id": 10,
+    "name": "Skoda Rapid",
+    "model": "Ambition",
+    "year": 2016,
+    "owner": "Deepak Joshi",
+    "price": "600000",
+    "mileage": 62000,
+    "location": "Lucknow"
+  }
+]
