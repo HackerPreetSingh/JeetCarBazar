@@ -35,7 +35,7 @@ export default function Cars() {
       <h2 className="text-4xl font-bold text-center mb-8 text-blue-700">Cars</h2>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         {paginatedCars.map((car) => (
-          <div key={car.id} className="border rounded shadow p-4 bg-white">
+          <div key={car.regNo} className="border rounded shadow p-4 bg-white">
             <Swiper
               modules={[Autoplay]}
               autoplay={{ delay: 2500, disableOnInteraction: false }}
@@ -70,7 +70,7 @@ export default function Cars() {
             <p className="text-sm text-gray-700">Fuel Version: {car.fuelVersion}</p>
             <p className="text-sm text-gray-700">Transmission: {car.transmission}</p>
             <p className="text-sm text-gray-700">
-              Insurance Upto: {car.insuranceUpto}
+              <span>Insurance Upto: {car.insuranceUpto instanceof Date ? car.insuranceUpto.toLocaleDateString("en-IN") : "N/A"}</span>
             </p>
 
             {/* Prices */}

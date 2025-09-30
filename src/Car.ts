@@ -1,5 +1,4 @@
 export class Car {
-  id!: string;
   name!: string;
   model!: string;
   year!: number;
@@ -9,7 +8,7 @@ export class Car {
   demandPrice!: string;
   finalPrice!: string;
   regNo!: string;
-  insuranceUpto!: string;
+  insuranceUpto!: any;
   fuelVersion!: string;
   transmission!: string;
   description!: string[];
