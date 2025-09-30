@@ -7,9 +7,7 @@ export async function fetchCarsFromFirebase() {
   // const cars = response.docs.map(doc => ({ id: doc.id, ...doc.data() as Omit<Car, 'id'> }));
   const cars: Car[] = response.docs.map(doc => {
     const data = doc.data() as Car;
-    if(data.insuranceUpto && (data.insuranceUpto as any).seconds !== undefined) {
-      data.insuranceUpto = (data.insuranceUpto as Timestamp).toDate();
-    }
+    data.insuranceUpto = (data.insuranceUpto as Timestamp).toDate();
     return data;
   });
   return cars;
