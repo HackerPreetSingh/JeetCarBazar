@@ -6,6 +6,12 @@ export class Car {
   owner!: string;
   mileage!: number;
   average!: string;
-  price!: string;
+  demandPrice!: string;
+  finalPrice!: string;
+  regNo!: string;
+  insuranceUpto!: string;
+  fuelVersion!: string;
+  transmission!: string;
+  description!: string[];
   images!: string[];
 }

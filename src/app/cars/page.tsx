@@ -3,25 +3,10 @@ import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
-import { getDocs, collection } from "firebase/firestore";
-import { db } from "@/app/firebaseConfig"
 import { Car } from "@/Car";
 import { CldImage } from "next-cloudinary";
-
-
-async function fetchCarsFromFirebase() {
-  const response = await getDocs(collection(db, "cars"));
-  const cars = response.docs.map(doc => ({ id: doc.id, ...doc.data() as Omit<Car, 'id'> }));
-  return cars;
-}
-
-function formatIndianNumber(x: string) {
-  const lastThree = x.substring(x.length - 3);
-  const otherNumbers = x.substring(0, x.length - 3);
-  return otherNumbers !== ""
-    ? otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + "," + lastThree
-    : lastThree;
-}
+import { fetchCarsFromFirebase } from "@/app/cars/api";
+import { formatIndianNumber } from "@/app/cars/utils";
 
 export default function Cars() {
   const [pageSize, setPageSize] = useState(8);
@@ -32,6 +17,12 @@ export default function Cars() {
     async function loadCars() {
       const carsData = await fetchCarsFromFirebase();
       setCars(carsData);
+      cars.forEach(car => {
+        console.log(`Details for ${car.name}:`);
+        console.log('Average: ', car.average);
+        console.log('Final Price: ', car.finalPrice);
+        console.log('Registration Number: ', car.regNo);
+      });
     }
     loadCars();
   }, []);
@@ -70,14 +61,32 @@ export default function Cars() {
                 </SwiperSlide>
               ))}
             </Swiper>
-            <h3 className="font-bold text-lg text-green-700 mt-2">{car.name}</h3>
-            <p className="text-sm text-gray-700">{car.model ?? ""} | {car.year ?? ""}</p>
-            <p className="text-sm text-gray-700">Owner: {car.owner ?? ""}</p>
-            <p className="text-sm text-gray-700">Mileage: {car.mileage ?? ""} km</p>
-            <p className="text-sm text-gray-700">Average: {car.average ?? ""}</p>
-            <p className="text-lg font-semibold mt-2 text-red-700">
-              ₹{car.price ? formatIndianNumber(car.price) : "N/A"}
+            <h3 className="font-bold text-lg text-green-700 mb-2">{car.name}</h3>
+            <p className="text-sm text-gray-700">
+              Model: {car.model} | Year: {car.year}
             </p>
+            <p className="text-sm text-gray-700">Owner: {car.owner}</p>
+            <p className="text-sm text-gray-700">Mileage: {car.mileage} km</p>
+            <p className="text-sm text-gray-700">Fuel Version: {car.fuelVersion}</p>
+            <p className="text-sm text-gray-700">Transmission: {car.transmission}</p>
+            <p className="text-sm text-gray-700">
+              Insurance Upto: {car.insuranceUpto}
+            </p>
+
+            {/* Prices */}
+            <p className="text-sm text-gray-700">
+              Demand Price:{" "}
+              {car.demandPrice ? formatIndianNumber(car.demandPrice) : "N/A"}
+            </p>
+
+            {/* Description (array) */}
+            {car.description && car.description.length > 0 && (
+              <ul className="list-disc pl-4 mt-2 text-gray-600 text-sm">
+                {car.description.map((point: string, i: number) => (
+                  <li key={i}>{point}</li>
+                ))}
+              </ul>
+            )}
           </div>
         ))}
       </div>
