@@ -8,6 +8,7 @@ export async function fetchCarsFromFirebase() {
   const cars: Car[] = response.docs.map(doc => {
     const data = doc.data() as Car;
     data.insuranceUpto = (data.insuranceUpto as Timestamp).toDate();
+    console.log(data.images[0]);
     return data;
   });
   return cars;
