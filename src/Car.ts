@@ -1,3 +1,5 @@
+import { Timestamp } from "firebase/firestore";
+
 export class Car {
   name!: string;
   model!: string;
@@ -8,7 +10,7 @@ export class Car {
   demandPrice!: string;
   finalPrice!: string;
   regNo!: string;
-  insuranceUpto!: any;
+  insuranceUpto!: Timestamp | Date;
   fuelVersion!: string;
   transmission!: string;
   description!: string[];
